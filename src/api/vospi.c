@@ -51,7 +51,7 @@ int vospi_init(int fd, uint32_t speed, vospi_frame_t* frame)
     return -1;
   }
   uint32_t spi_speed = SPI_IOC_WR_MAX_SPEED_HZ ;
-  //uint32_t spi_speed = 10000000 ;
+  //uint32_t spi_speed = 20000000 ;
   log_debug("setting SPI max clock speed...");
   if (ioctl(fd, spi_speed, &speed) == -1) {
     log_fatal("SPI: failed to set the max speed option");
@@ -180,7 +180,8 @@ void transfer_segment(int gpio, int level, uint32_t tick)
             } else {
               // Note that we got a frame
               frame_captured = 1;
- 
+              printf("capture\r\n");
+
               // Setup to get the next frame
               curSegment = 1;
               validSegmentRegion = 0;
@@ -188,7 +189,7 @@ void transfer_segment(int gpio, int level, uint32_t tick)
             bad_segments = 0;
           }
           done = 1;
-        }
+	        }
       }
       prevLine = line;
     } else {
@@ -206,7 +207,7 @@ void transfer_segment(int gpio, int level, uint32_t tick)
     // Attemp to resync
     log_info("Resync");
     bad_segments = 0;
-    isr_sleep_ms(185);
+   // isr_sleep_ms(185);
   }
 }
 
