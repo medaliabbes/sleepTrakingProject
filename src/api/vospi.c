@@ -91,6 +91,7 @@ int sync_and_transfer_frame()
 {
   if (frame_captured) {
     frame_captured = 0;   // Note we've consumed the buffer
+    printf("frame cp\r\n") ;
     return (1);
   } else {
     return (0);
@@ -166,7 +167,7 @@ void transfer_segment(int gpio, int level, uint32_t tick)
 	    sum = sum+lepPacket.symbols[i] ;
 		//printf("%d," , lepPacket.symbols[i]);
           }
-		printf("sum =%d\r\n",sum);
+		//printf("sum =%d\r\n",sum);
         }
         
         if (line == 59) {
